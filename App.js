@@ -9,21 +9,30 @@ export default function App() {
   const [ratkaisu, setRatkaisu] = useState ('');
 
   const yhteenlasku = () => {
-    Alert.alert('Halusit yhteenlaskun');
+    const tulos = parseInt(numero1) + parseInt(numero2);
+    setRatkaisu(tulos);
   }
   const vahennyslasku = () => {
-    Alert.alert('Halusit vähennyslaskun');
+    const tulos = parseInt(numero1) - parseInt(numero2);
+    setRatkaisu(tulos);
   }
 
   return (
     <View style={styles.container}>
-      <Text>Ratkaisu {ratkaisu}</Text>
-      <TextInput style={styles.input} onChangeText={numero1 => setNumero1(numero1)} value={numero1}/>
-      <TextInput style={styles.input} onChangeText={numero2 => setNumero2(numero2)} value={numero2}/>
-      <Button style={styles.button} onPress={yhteenlasku} title="+" />
-      <Button style={styles.button} onPress={vahennyslasku} title="-" />
+      <Text>Ratkaisu: {ratkaisu}</Text>
+      <TextInput keyboardType='numeric' style={styles.input} onChangeText={numero1 => setNumero1(numero1)} value={numero1}/>
+      <TextInput keyboardType='numeric' style={styles.input} onChangeText={numero2 => setNumero2(numero2)} value={numero2}/>
+      <View style={styles.buttonrow}>
+        <View style={styles.button}>
+      <Button onPress={yhteenlasku} title="+" />
+      </View>
+      <View style={styles.button}>
+      <Button onPress={vahennyslasku} title="-" />
+      </View>
+      </View>
+     
       <StatusBar style="auto" />
-    </View>
+      </View>
   );
 }
 
@@ -33,15 +42,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    justifyContent: 'space-evenly',
   },
   input : {
-    width: 50 ,
+    width: 75 ,
     borderColor: 'gray',
     borderWidth: 1,
   },
-  button: {
-    width: 30,
-    backgroundColor: '#fff',
+  button : {
+    padding: 20,
+  },
+  buttonrow : {
+    flexDirection: 'row'
   }
 });
